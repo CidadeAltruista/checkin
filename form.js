@@ -84,4 +84,35 @@ function preencherSelect(id) {
     select.appendChild(option);
   });
 }
+function validarFormulario(e) {
+  e.preventDefault();
+
+  const form = document.getElementById("checkinForm");
+  const data = new FormData(form);
+
+  // Adiciona o token de validação
+  data.append("token", "CHECKIN2024");
+
+  const actionUrl = "https://script.google.com/macros/s/SEU_ID_EXEC/exec"; // substitui aqui
+
+  fetch(actionUrl, {
+    method: "POST",
+    body: data
+  })
+  .then(response => response.text())
+  .then(result => {
+    if (result.includes("Sucesso")) {
+      alert("Check-in enviado com sucesso!");
+      form.reset();
+    } else {
+      alert("Erro ao enviar: " + result);
+    }
+  })
+  .catch(error => {
+    alert("Erro ao enviar. Tente novamente.");
+    console.error("Erro:", error);
+  });
+
+  return false;
+}
 
