@@ -36,6 +36,10 @@ function atualizarTraducoes() {
   }
   document.querySelector("#checkinForm button[type='submit']").textContent = t.enviar;
   document.getElementById("cabecalho-info").innerHTML = traducoes[linguaAtual].cabecalho;
+  document.getElementById("label-fatura-checkbox").textContent = t.faturaCheckbox;
+  document.getElementById("btn-fatura-sim").textContent = t.faturaSim;
+  document.getElementById("btn-fatura-nao").textContent = t.faturaNao;
+
 
 
 }
