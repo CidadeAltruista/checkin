@@ -66,6 +66,15 @@ function initForm() {
 
 function preencherSelect(id) {
   const select = document.getElementById(id);
+  select.innerHTML = ""; // limpa opções existentes
+
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "--";
+  defaultOption.disabled = true;
+  defaultOption.selected = true;
+  select.appendChild(defaultOption);
+
   countryList.forEach(pais => {
     const option = document.createElement("option");
     option.value = pais;
@@ -73,3 +82,4 @@ function preencherSelect(id) {
     select.appendChild(option);
   });
 }
+
