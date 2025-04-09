@@ -86,4 +86,28 @@ button {
   color: white;
 }
 
+.fatura-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+.fatura-buttons button {
+  background-color: transparent;
+  border: 2px solid #4F6162;
+  color: #4F6162;
+  border-radius: 12px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.fatura-buttons button.selected {
+  background-color: #244041;
+  color: white;
+  border-color: #244041;
+}
 
