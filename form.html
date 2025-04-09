@@ -1,3 +1,5 @@
+# Criar um novo ficheiro form.html com todos os campos do formulário completo
+formulario_completo = """
 <div id="lingua-selector">
   <button onclick="selecionarLingua('pt')" id="btn-pt">Português</button>
   <button onclick="selecionarLingua('en')" id="btn-en">English</button>
@@ -7,11 +9,85 @@
 
 <form id="checkinForm" onsubmit="return validarFormulario(event)">
   <input type="hidden" id="id-reserva" name="idReserva">
+
   <label id="label-primeiro-nome" for="primeiro-nome-input"></label>
   <input type="text" id="primeiro-nome-input" name="primeiroNome" maxlength="40" required>
+
+  <label id="label-ultimo-nome" for="ultimo-nome-input"></label>
+  <input type="text" id="ultimo-nome-input" name="ultimoNome" maxlength="40" required>
+
+  <label id="label-local-nascimento" for="local-nascimento-input"></label>
+  <input type="text" id="local-nascimento-input" name="localNascimento" maxlength="40" required>
+
+  <label id="label-data-nascimento" for="data-nascimento-input"></label>
+  <input type="date" id="data-nascimento-input" name="dataNascimento" required>
+
+  <label id="label-nacionalidade" for="nacionalidade-input"></label>
+  <select id="nacionalidade-input" name="nacionalidade" required>
+    <option value="">--</option>
+    <option>Portugal</option>
+    <option>Spain</option>
+    <option>France</option>
+    <option>Germany</option>
+    <option>Brazil</option>
+    <option>Italy</option>
+    <option>United Kingdom</option>
+    <option>United States</option>
+    <option>Other</option>
+  </select>
+
+  <label id="label-id-number" for="id-number-input"></label>
+  <input type="text" id="id-number-input" name="idNumber" maxlength="40" required>
+
+  <label id="label-country-document" for="country-document-input"></label>
+  <select id="country-document-input" name="countryDocument" required>
+    <option value="">--</option>
+    <option>Portugal</option>
+    <option>Spain</option>
+    <option>France</option>
+    <option>Germany</option>
+    <option>Brazil</option>
+    <option>Italy</option>
+    <option>United Kingdom</option>
+    <option>United States</option>
+    <option>Other</option>
+  </select>
+
+  <label id="label-id-type" for="id-type-input"></label>
+  <select id="id-type-input" name="idType" required>
+    <option value="Passport">Passport</option>
+    <option value="ID">ID</option>
+  </select>
+
+  <label id="label-country-residence" for="country-residence-input"></label>
+  <select id="country-residence-input" name="countryResidence" required>
+    <option value="">--</option>
+    <option>Portugal</option>
+    <option>Spain</option>
+    <option>France</option>
+    <option>Germany</option>
+    <option>Brazil</option>
+    <option>Italy</option>
+    <option>United Kingdom</option>
+    <option>United States</option>
+    <option>Other</option>
+  </select>
+
+  <label id="label-place-residence" for="place-residence-input"></label>
+  <input type="text" id="place-residence-input" name="placeResidence" maxlength="40" required>
+
+  <label id="label-arrival-time" for="arrival-time-input"></label>
+  <input type="time" id="arrival-time-input" name="arrivalTime">
 
   <label id="label-email" for="email-input"></label>
   <input type="email" id="email-input" name="email">
 
   <button type="submit">Enviar</button>
 </form>
+"""
+
+# Guardar o ficheiro separado para download
+form_path = Path("/mnt/data/form.html")
+form_path.write_text(formulario_completo.strip(), encoding="utf-8")
+
+form_path
