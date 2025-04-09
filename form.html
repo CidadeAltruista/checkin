@@ -50,6 +50,35 @@
   <label id="label-email" for="email-input"></label>
   <input type="email" id="email-input" name="email">
 
+  <label for="fatura-checkbox">
+  <input type="checkbox" id="fatura-checkbox" onchange="mostrarCamposFatura()"> Deseja fatura com contribuinte?
+</label>
+
+<div id="secao-fatura" style="display: none; border: 1px solid #ccc; padding: 15px; margin-top: 15px; border-radius: 8px; background-color: #fffbe6;">
+
+  <label for="nome-fatura">Nome</label>
+  <input type="text" id="nome-fatura" name="nomeFatura">
+
+  <label for="nif-fatura">NIF *</label>
+  <input type="text" id="nif-fatura" name="nifFatura">
+
+  <label for="morada-fatura">Morada</label>
+  <input type="text" id="morada-fatura" name="moradaFatura">
+
+  <label for="codpostal-fatura">Código Postal</label>
+  <input type="text" id="codpostal-fatura" name="codPostalFatura">
+
+  <label for="cidade-fatura">Cidade</label>
+  <input type="text" id="cidade-fatura" name="cidadeFatura">
+
+  <label for="pais-fatura">País *</label>
+  <input type="text" id="pais-fatura" name="paisFatura">
+
+  <label for="email-fatura">Email para envio da fatura *</label>
+  <input type="email" id="email-fatura" name="emailFatura">
+</div>
+
+
   <button type="submit">Enviar</button>
 </form>
 
