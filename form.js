@@ -51,11 +51,13 @@ function validarFormulario(e) {
 
 function preencherIdReserva() {
   const params = new URLSearchParams(window.location.search);
-  const idres = params.get("idres");
+  const idres = params.get("idres") || params.get("idReserva");
   if (idres) {
     document.getElementById("id-reserva").value = idres;
+    document.getElementById("id-reserva-texto").textContent = "ID Reserva: " + idres;
   }
 }
+
 
 function initForm() {
   selecionarLingua(linguaAtual);
