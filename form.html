@@ -50,9 +50,14 @@
   <label id="label-email" for="email-input"></label>
   <input type="email" id="email-input" name="email">
 
-<label id="label-fatura-checkbox" for="fatura-checkbox">
-  <input type="checkbox" id="fatura-checkbox" onchange="mostrarCamposFatura()"> Deseja fatura com contribuinte?
-</label>
+<div id="fatura-opcao">
+  <label id="label-fatura-checkbox">Deseja fatura com contribuinte?</label>
+  <div class="fatura-buttons">
+    <button type="button" id="btn-fatura-sim" onclick="selecionarFatura(true)">Sim</button>
+    <button type="button" id="btn-fatura-nao" onclick="selecionarFatura(false)">Não</button>
+  </div>
+</div>
+
 
 <div id="secao-fatura" style="display: none; ...">
 
