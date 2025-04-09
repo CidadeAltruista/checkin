@@ -1,5 +1,4 @@
-# Criar um novo ficheiro form.html com todos os campos do formulário completo
-formulario_completo = """
+
 <div id="lingua-selector">
   <button onclick="selecionarLingua('pt')" id="btn-pt">Português</button>
   <button onclick="selecionarLingua('en')" id="btn-en">English</button>
@@ -84,10 +83,4 @@ formulario_completo = """
 
   <button type="submit">Enviar</button>
 </form>
-"""
 
-# Guardar o ficheiro separado para download
-form_path = Path("/mnt/data/form.html")
-form_path.write_text(formulario_completo.strip(), encoding="utf-8")
-
-form_path
