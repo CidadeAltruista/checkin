@@ -16,20 +16,23 @@ const traducoes = {
     sucesso: "Check-in enviado com sucesso!",
     erroEnvio: "Erro ao enviar o formulário. Tente novamente.",
     erroFetch: "Erro de rede. Tente novamente.",
-    cabecalho: `
-      <h2>Boletim de Alojamento</h2>
-      <p>Em Portugal, assim como na maioria dos países europeus, todos os estabelecimentos de alojamento pago devem registar a estadia e recolher dados de identificação de todos os cidadãos, sejam eles de Estados-Membros da União Europeia ou de Países Terceiros, para comunicar ao Serviço de Estrangeiros e Fronteiras no prazo de três dias.</p>
-      <p>Todos os dados pessoais fornecidos serão tratados em conformidade com o Regulamento Geral sobre a Proteção de Dados (RGPD - UE 2016/679).</p>
-      <p><strong><a href="https://alojamento-ninho.pt/Terms-Policies" target="_blank">Termos e Condições</a></strong></p>
-    `,
+    erroFatura: "Por favor preencha os campos obrigatórios para a fatura.",
     faturaCheckbox: "Deseja fatura com contribuinte?",
+    faturaSim: "Sim",
+    faturaNao: "Não",
     nomeFatura: "Nome",
     nifFatura: "NIF *",
     moradaFatura: "Morada",
     codpostalFatura: "Código Postal",
     cidadeFatura: "Cidade",
     paisFatura: "País *",
-    emailFatura: "Email para envio da fatura *"
+    emailFatura: "Email para envio da fatura *",
+    cabecalho: `
+      <h2>Boletim de Alojamento</h2>
+      <p>Em Portugal, assim como na maioria dos países europeus, todos os estabelecimentos de alojamento pago devem registar a estadia e recolher dados de identificação de todos os cidadãos, sejam eles de Estados-Membros da União Europeia ou de Países Terceiros, para comunicar ao Serviço de Estrangeiros e Fronteiras no prazo de três dias.</p>
+      <p>Todos os dados pessoais fornecidos serão tratados em conformidade com o Regulamento Geral sobre a Proteção de Dados (RGPD - UE 2016/679).</p>
+      <p><strong><a href="https://alojamento-ninho.pt/Terms-Policies" target="_blank">Termos e Condições</a></strong></p>
+    `
   },
   en: {
     primeiroNome: "First Name",
@@ -45,7 +48,13 @@ const traducoes = {
     arrivalTime: "Arrival Time",
     email: "Leave your email if you want to stay in touch!",
     enviar: "Submit",
+    sucesso: "Check-in submitted successfully!",
+    erroEnvio: "Error submitting the form. Please try again.",
+    erroFetch: "Network error. Please try again.",
+    erroFatura: "Please fill in the required invoice fields.",
     faturaCheckbox: "Would you like an invoice with tax ID?",
+    faturaSim: "Yes",
+    faturaNao: "No",
     nomeFatura: "Name",
     nifFatura: "Tax ID *",
     moradaFatura: "Address",
@@ -53,9 +62,6 @@ const traducoes = {
     cidadeFatura: "City",
     paisFatura: "Country *",
     emailFatura: "Invoice email *",
-    sucesso: "Check-in submitted successfully!",
-    erroEnvio: "Error submitting the form. Please try again.",
-    erroFetch: "Network error. Please try again.",
     cabecalho: `
       <h2>Accommodation Bulletin</h2>
       <p>In Portugal, as well as in most European countries, all paid accommodation establishments need to record the stay and collect identification details from all citizens, whether they are from Member States of the European Union or Third Country Nationals, in order to communicate them within three days to the Immigration and Borders Service.</p>
@@ -77,7 +83,13 @@ const traducoes = {
     arrivalTime: "Heure d'arrivée",
     email: "Laissez votre e-mail si vous souhaitez rester en contact !",
     enviar: "Envoyer",
+    sucesso: "Formulaire envoyé avec succès !",
+    erroEnvio: "Erreur lors de l'envoi du formulaire. Veuillez réessayer.",
+    erroFetch: "Erreur de réseau. Veuillez réessayer.",
+    erroFatura: "Veuillez remplir les champs obligatoires pour la facture.",
     faturaCheckbox: "Souhaitez-vous une facture avec numéro fiscal ?",
+    faturaSim: "Oui",
+    faturaNao: "Non",
     nomeFatura: "Nom",
     nifFatura: "Numéro fiscal *",
     moradaFatura: "Adresse",
@@ -85,9 +97,6 @@ const traducoes = {
     cidadeFatura: "Ville",
     paisFatura: "Pays *",
     emailFatura: "Email pour l'envoi de la facture *",
-    sucesso: "Formulaire envoyé avec succès !",
-    erroEnvio: "Erreur lors de l'envoi du formulaire. Veuillez réessayer.",
-    erroFetch: "Erreur de réseau. Veuillez réessayer.",
     cabecalho: `
       <h2>Bulletin d'Hébergement</h2>
       <p>Au Portugal, comme dans la plupart des pays européens, tous les établissements d'hébergement payants doivent enregistrer le séjour et collecter les informations d'identification de tous les citoyens, qu'ils soient ressortissants de l'Union européenne ou de pays tiers, afin de les communiquer dans un délai de trois jours au Service de l'immigration et des frontières.</p>
@@ -109,7 +118,13 @@ const traducoes = {
     arrivalTime: "Hora de llegada",
     email: "¡Deja tu correo si quieres mantener el contacto!",
     enviar: "Enviar",
+    sucesso: "¡Formulario enviado correctamente!",
+    erroEnvio: "Error al enviar el formulario. Inténtalo de nuevo.",
+    erroFetch: "Error de red. Inténtalo de nuevo.",
+    erroFatura: "Por favor, rellene los campos obligatorios para la factura.",
     faturaCheckbox: "¿Desea factura con NIF?",
+    faturaSim: "Sí",
+    faturaNao: "No",
     nomeFatura: "Nombre",
     nifFatura: "NIF *",
     moradaFatura: "Dirección",
@@ -117,9 +132,6 @@ const traducoes = {
     cidadeFatura: "Ciudad",
     paisFatura: "País *",
     emailFatura: "Correo para envío de la factura *",
-    sucesso: "¡Formulario enviado correctamente!",
-    erroEnvio: "Error al enviar el formulario. Inténtalo de nuevo.",
-    erroFetch: "Error de red. Inténtalo de nuevo.",
     cabecalho: `
       <h2>Boletín de Alojamiento</h2>
       <p>En Portugal, al igual que en la mayoría de los países europeos, todos los alojamientos de pago deben registrar la estancia y recopilar los datos de identificación de todos los ciudadanos, ya sean de Estados miembros de la Unión Europea o de países terceros, con el fin de comunicarlos en un plazo de tres días al Servicio de Inmigración y Fronteras.</p>
