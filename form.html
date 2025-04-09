@@ -9,7 +9,9 @@
 
 <form id="checkinForm" onsubmit="return validarFormulario(event)">
   <label for="id-reserva">ID Reserva</label>
-  <input type="text" id="id-reserva" name="idReserva" readonly>
+  <p id="id-reserva-texto" style="font-size: 12px; color: #444; text-align: right; margin-top: 20px;"></p>
+  <input type="hidden" id="id-reserva" name="idReserva">
+
 
   <label id="label-primeiro-nome" for="primeiro-nome-input"></label>
   <input type="text" id="primeiro-nome-input" name="primeiroNome" maxlength="40" required>
