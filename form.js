@@ -58,3 +58,13 @@ function initForm() {
   selecionarLingua(linguaAtual);
   preencherIdReserva();
 }
+
+function preencherSelect(id) {
+  const select = document.getElementById(id);
+  countryList.forEach(pais => {
+    const option = document.createElement("option");
+    option.value = pais;
+    option.textContent = pais;
+    select.appendChild(option);
+  });
+}
