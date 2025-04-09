@@ -84,34 +84,57 @@ function preencherSelect(id) {
     select.appendChild(option);
   });
 }
+
+
 function validarFormulario(e) {
   e.preventDefault();
 
   const form = document.getElementById("checkinForm");
   const data = new FormData(form);
 
-  // Adiciona o token de validação
+  // Adiciona o token de segurança
   data.append("token", "CHECKIN2024");
 
-  const actionUrl = "https://script.google.com/macros/s/AKfycbwzPuRVxdr2_dPM51EOknFIL1_dONpyWSJL0yKMBCi2gCCchxCFc3cmLt0ub2LFgA09/exec"; // substitui aqui
+  const actionUrl = "https://script.google.com/macros/s/AKfycbwzPuRVxdr2_dPM51EOknFIL1_dONpyWSJL0yKMBCi2gCCchxCFc3cmLt0ub2LFgA09/exec";
 
   fetch(actionUrl, {
     method: "POST",
     body: data
   })
-  .then(response => response.text())
-  .then(result => {
-    if (result.includes("Sucesso")) {
-      alert("Check-in enviado com sucesso!");
-      form.reset();
-    } else {
-      alert("Erro ao enviar: " + result);
-    }
-  })
-  .catch(error => {
-    alert("Erro ao enviar. Tente novamente.");
-    console.error("Erro:", error);
-  });
+    .then(response => response.text())
+    .then(result => {
+      const t = traducoes[linguaAtual]; // Traduções do idioma atual
+
+      if (result.includes("Sucesso")) {
+        alert(t.sucesso || "Check-in enviado com sucesso!");
+
+        // Guardar o idioma antes do reset
+        const langAntesReset = linguaAtual;
+
+        // Limpa o formulário
+        form.reset();
+
+        // Reaplicar idioma anterior
+        selecionarLingua(langAntesReset);
+
+        // Repor selects com países para "--"
+        ["nacionalidade-input", "country-document-input", "country-residence-input"].forEach(id => {
+          const select = document.getElementById(id);
+          if (select) select.selectedIndex = 0;
+        });
+
+        // Limpar texto visível do ID Reserva (opcional)
+        const idText = document.getElementById("id-reserva-texto");
+        if (idText) idText.textContent = "";
+
+      } else {
+        alert(t.erroEnvio || "Erro ao enviar o formulário. Tente novamente.");
+      }
+    })
+    .catch(error => {
+      alert(traducoes[linguaAtual].erroFetch || "Erro de rede. Tente novamente.");
+      console.error("Erro:", error);
+    });
 
   return false;
 }
