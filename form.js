@@ -20,7 +20,15 @@ function atualizarTraducoes() {
     "label-country-residence": t.countryResidence,
     "label-place-residence": t.placeResidence,
     "label-arrival-time": t.arrivalTime,
-    "label-email": t.email
+    "label-email": t.email,
+    "label-fatura-checkbox": t.faturaCheckbox,
+    "label-nome-fatura": t.nomeFatura,
+    "label-nif-fatura": t.nifFatura,
+    "label-morada-fatura": t.moradaFatura,
+    "label-codpostal-fatura": t.codpostalFatura,
+    "label-cidade-fatura": t.cidadeFatura,
+    "label-pais-fatura": t.paisFatura,
+    "label-email-fatura": t.emailFatura
   };
   for (const id in ids) {
     const el = document.getElementById(id);
