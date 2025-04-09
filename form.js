@@ -86,16 +86,38 @@ function preencherSelect(id) {
 }
 
 
+function mostrarCamposFatura() {
+  const secao = document.getElementById("secao-fatura");
+  secao.style.display = document.getElementById("fatura-checkbox").checked ? "block" : "none";
+}
+
 function validarFormulario(e) {
   e.preventDefault();
 
   const form = document.getElementById("checkinForm");
   const data = new FormData(form);
 
-  // Adiciona o token de segurança
+  // Adiciona token de segurança
   data.append("token", "CHECKIN2024");
 
-  const actionUrl = "https://script.google.com/macros/s/AKfycbwzPuRVxdr2_dPM51EOknFIL1_dONpyWSJL0yKMBCi2gCCchxCFc3cmLt0ub2LFgA09/exec";
+  // Validação extra se quiser fatura
+  const querFatura = document.getElementById("fatura-checkbox").checked;
+  if (querFatura) {
+    const nif = document.getElementById("nif-fatura").value.trim();
+    const pais = document.getElementById("pais-fatura").value.trim();
+    const emailFatura = document.getElementById("email-fatura").value.trim();
+
+    if (!nif || !pais || !emailFatura) {
+      alert(traducoes[linguaAtual].erroFatura || "Por favor preencha os campos obrigatórios para a fatura.");
+      return false;
+    }
+
+    data.append("desejaFatura", "Sim");
+  } else {
+    data.append("desejaFatura", "Não");
+  }
+
+  const actionUrl = "https://script.google.com/macros/s/SEU_ID_EXEC/exec"; // substitui aqui
 
   fetch(actionUrl, {
     method: "POST",
@@ -103,39 +125,32 @@ function validarFormulario(e) {
   })
     .then(response => response.text())
     .then(result => {
-      const t = traducoes[linguaAtual]; // Traduções do idioma atual
+      const t = traducoes[linguaAtual];
 
       if (result.includes("Sucesso")) {
         alert(t.sucesso || "Check-in enviado com sucesso!");
 
-        // Guardar o idioma antes do reset
         const langAntesReset = linguaAtual;
-
-        // Limpa o formulário
         form.reset();
-
-        // Reaplicar idioma anterior
         selecionarLingua(langAntesReset);
 
-        // Repor selects com países para "--"
         ["nacionalidade-input", "country-document-input", "country-residence-input"].forEach(id => {
           const select = document.getElementById(id);
           if (select) select.selectedIndex = 0;
         });
 
-        // Limpar texto visível do ID Reserva (opcional)
         const idText = document.getElementById("id-reserva-texto");
         if (idText) idText.textContent = "";
 
+        mostrarCamposFatura(); // esconde secção de fatura
       } else {
-        alert(t.erroEnvio || "Erro ao enviar o formulário. Tente novamente.");
+        alert(t.erroEnvio || "Erro ao enviar o formulário.");
       }
     })
     .catch(error => {
-      alert(traducoes[linguaAtual].erroFetch || "Erro de rede. Tente novamente.");
+      alert(traducoes[linguaAtual].erroFetch || "Erro de rede.");
       console.error("Erro:", error);
     });
 
   return false;
 }
-
