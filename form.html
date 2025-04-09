@@ -7,7 +7,8 @@
 </div>
 
 <form id="checkinForm" onsubmit="return validarFormulario(event)">
-  <input type="text" id="id-reserva" name="idReserva">
+  <label for="id-reserva">ID Reserva</label>
+  <input type="text" id="id-reserva" name="idReserva" readonly>
 
   <label id="label-primeiro-nome" for="primeiro-nome-input"></label>
   <input type="text" id="primeiro-nome-input" name="primeiroNome" maxlength="40" required>
