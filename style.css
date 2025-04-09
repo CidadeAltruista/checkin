@@ -1,33 +1,56 @@
 body {
   font-family: sans-serif;
-  max-width: 600px;
+  background-color: #F4DFB6;
+  color: #1A1A1A;
+  max-width: 700px;
   margin: auto;
   padding: 20px;
 }
+
+h2 {
+  color: #4F6162;
+}
+
 label {
   display: block;
   margin-top: 20px;
   margin-bottom: 5px;
+  font-weight: bold;
 }
-input, select, button {
+
+input, select, textarea {
   width: 100%;
   padding: 10px;
+  border: 1px solid #BFBFBF;
+  border-radius: 4px;
+  background-color: #FFFFFF;
   margin-bottom: 16px;
+  font-size: 14px;
 }
+
 button {
-  background-color: #007bff;
-  color: white;
+  background-color: #4F6162;
+  color: #FFFFFF;
   font-size: 18px;
   border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#lingua-selector button {
+  background-color: transparent;
+  color: #4F6162;
+  border: 2px solid #4F6162;
+  border-radius: 4px;
+  padding: 6px 12px;
+  margin-right: 5px;
   cursor: pointer;
 }
-#lingua-selector button {
-  width: auto;
-  margin-right: 5px;
-  padding: 6px 12px;
-}
+
 #lingua-selector button.selected {
-  background-color: #007bff;
-  color: white;
+  background-color: #244041;
+  color: #FFFFFF;
   font-weight: bold;
 }
