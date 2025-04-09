@@ -94,10 +94,25 @@ function preencherSelect(id) {
 }
 
 
-function mostrarCamposFatura() {
-  const secao = document.getElementById("secao-fatura");
-  secao.style.display = document.getElementById("fatura-checkbox").checked ? "block" : "none";
+function selecionarFatura(querFatura) {
+  const simBtn = document.getElementById("btn-fatura-sim");
+  const naoBtn = document.getElementById("btn-fatura-nao");
+  const secaoFatura = document.getElementById("secao-fatura");
+
+  if (querFatura) {
+    simBtn.classList.add("selected");
+    naoBtn.classList.remove("selected");
+    secaoFatura.style.display = "block";
+  } else {
+    simBtn.classList.remove("selected");
+    naoBtn.classList.add("selected");
+    secaoFatura.style.display = "none";
+  }
+
+  // Guardar valor internamente
+  document.getElementById("fatura-opcao").setAttribute("data-quer-fatura", querFatura ? "sim" : "nao");
 }
+
 
 function validarFormulario(e) {
   e.preventDefault();
@@ -109,7 +124,7 @@ function validarFormulario(e) {
   data.append("token", "CHECKIN2024");
 
   // Validação extra se quiser fatura
-  const querFatura = document.getElementById("fatura-checkbox").checked;
+  const querFatura = document.getElementById("fatura-opcao").getAttribute("data-quer-fatura") === "sim";
   if (querFatura) {
     const nif = document.getElementById("nif-fatura").value.trim();
     const pais = document.getElementById("pais-fatura").value.trim();
