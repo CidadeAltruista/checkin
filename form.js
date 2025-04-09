@@ -57,6 +57,8 @@ function preencherIdReserva() {
 function initForm() {
   selecionarLingua(linguaAtual);
   preencherIdReserva();
+  ["nacionalidade-input", "country-document-input", "country-residence-input"]
+  .forEach(preencherSelect);
 }
 
 function preencherSelect(id) {
