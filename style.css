@@ -57,21 +57,22 @@ button {
 
 .language-buttons {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 16px;
 }
 
 .language-buttons button {
   background-color: transparent;
   border: 2px solid #4F6162;
   color: #4F6162;
-  border-radius: 20px;
-  padding: 8px 16px;
-  font-weight: bold;
-  font-size: 14px;
-  transition: all 0.3s ease;
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
+  transition: 0.3s;
+  min-width: 40px;
 }
 
 .language-buttons button.selected {
@@ -84,4 +85,5 @@ button {
   background-color: #4F6162;
   color: white;
 }
+
 
