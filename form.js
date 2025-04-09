@@ -93,7 +93,7 @@ function validarFormulario(e) {
   // Adiciona o token de validação
   data.append("token", "CHECKIN2024");
 
-  const actionUrl = "https://script.google.com/macros/s/SEU_ID_EXEC/exec"; // substitui aqui
+  const actionUrl = "https://script.google.com/macros/s/AKfycbwzPuRVxdr2_dPM51EOknFIL1_dONpyWSJL0yKMBCi2gCCchxCFc3cmLt0ub2LFgA09/exec"; // substitui aqui
 
   fetch(actionUrl, {
     method: "POST",
