@@ -1,0 +1,17 @@
+<div id="lingua-selector">
+  <button onclick="selecionarLingua('pt')" id="btn-pt">Português</button>
+  <button onclick="selecionarLingua('en')" id="btn-en">English</button>
+  <button onclick="selecionarLingua('fr')" id="btn-fr">Français</button>
+  <button onclick="selecionarLingua('es')" id="btn-es">Español</button>
+</div>
+
+<form id="checkinForm" onsubmit="return validarFormulario(event)">
+  <input type="hidden" id="id-reserva" name="idReserva">
+  <label id="label-primeiro-nome" for="primeiro-nome-input"></label>
+  <input type="text" id="primeiro-nome-input" name="primeiroNome" maxlength="40" required>
+
+  <label id="label-email" for="email-input"></label>
+  <input type="email" id="email-input" name="email">
+
+  <button type="submit">Enviar</button>
+</form>

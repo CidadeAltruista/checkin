@@ -1,0 +1,62 @@
+const traducoes = {
+  pt: {
+    primeiroNome: "Primeiro Nome",
+    ultimoNome: "Último Nome",
+    localNascimento: "Local de Nascimento",
+    dataNascimento: "Data de Nascimento",
+    nacionalidade: "Nacionalidade",
+    idNumber: "Número de Identificação",
+    countryDocument: "País do Documento",
+    idType: "Tipo de Documento",
+    countryResidence: "País de Residência",
+    placeResidence: "Local de Residência",
+    arrivalTime: "Hora de Chegada",
+    email: "Deixe o seu email se quiser manter contacto:",
+    enviar: "Enviar"
+  },
+  en: {
+    primeiroNome: "First Name",
+    ultimoNome: "Last Name",
+    localNascimento: "Place of Birth",
+    dataNascimento: "Date of Birth",
+    nacionalidade: "Nationality",
+    idNumber: "ID Number",
+    countryDocument: "Country of Document",
+    idType: "ID Type",
+    countryResidence: "Country of Residence",
+    placeResidence: "Place of Residence",
+    arrivalTime: "Arrival Time",
+    email: "Leave your email if you want to stay in touch!",
+    enviar: "Submit"
+  },
+  fr: {
+    primeiroNome: "Prénom",
+    ultimoNome: "Nom de famille",
+    localNascimento: "Lieu de naissance",
+    dataNascimento: "Date de naissance",
+    nacionalidade: "Nationalité",
+    idNumber: "Numéro d'identité",
+    countryDocument: "Pays du document",
+    idType: "Type de document",
+    countryResidence: "Pays de résidence",
+    placeResidence: "Lieu de résidence",
+    arrivalTime: "Heure d'arrivée",
+    email: "Laissez votre e-mail si vous souhaitez rester en contact !",
+    enviar: "Envoyer"
+  },
+  es: {
+    primeiroNome: "Nombre",
+    ultimoNome: "Apellido",
+    localNascimento: "Lugar de nacimiento",
+    dataNascimento: "Fecha de nacimiento",
+    nacionalidade: "Nacionalidad",
+    idNumber: "Número de Identificación",
+    countryDocument: "País del documento",
+    idType: "Tipo de documento",
+    countryResidence: "País de residencia",
+    placeResidence: "Lugar de residencia",
+    arrivalTime: "Hora de llegada",
+    email: "¡Deja tu correo si quieres mantener el contacto!",
+    enviar: "Enviar"
+  }
+};
