@@ -27,6 +27,8 @@ function atualizarTraducoes() {
     if (el) el.textContent = ids[id];
   }
   document.querySelector("#checkinForm button[type='submit']").textContent = t.enviar;
+  document.getElementById("cabecalho-info").innerHTML = traducoes.cabecalho[linguaAtual];
+
 }
 
 function atualizarBotoes() {
