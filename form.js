@@ -147,7 +147,7 @@ function validarFormulario(e) {
     data.append("desejaFatura", "Não");
   }
 
-  const actionUrl = "https://script.google.com/macros/s/SEU_ID_EXEC/exec"; // substitui aqui
+  const actionUrl = "https://script.google.com/macros/s/AKfycbxkSoOm0QntjZrC1ukYhGmBkY4eMhCB8c-APF3CMZpT9Vczm0xbYw3mr87PUfZVe5ZV/exec"; // substitui aqui
 
   fetch(actionUrl, {
     method: "POST",
