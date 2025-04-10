@@ -6,10 +6,9 @@
   <button onclick="selecionarLingua('es')" id="btn-es">ES</button>
 </div>
 
+<div id="erro-idreserva" style="display: none; color: red; font-weight: bold; margin: 20px 0;"></div>
 
 <form id="checkinForm" onsubmit="return validarFormulario(event)">
-  <div id="erro-idreserva" style="display: none; color: red; font-weight: bold; margin: 20px 0;"></div>
-
   <p id="id-reserva-texto" style="font-size: 12px; color: #444; text-align: left; margin-top: 20px;"></p>
   <input type="hidden" id="id-reserva" name="idReserva">
 
@@ -89,4 +88,5 @@
 
   <button type="submit">Enviar</button>
 </form>
+
 
