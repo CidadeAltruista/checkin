@@ -162,12 +162,15 @@ async function validarFormulario(e) {
   const actionUrl = "https://script.google.com/macros/s/AKfycbxkSoOm0QntjZrC1ukYhGmBkY4eMhCB8c-APF3CMZpT9Vczm0xbYw3mr87PUfZVe5ZV/exec";
 
   try {
-    const response = await fetch(actionUrl, {
-      method: "POST",
-      body: data
-    });
+const response = await fetch(actionUrl, {
+  method: "POST",
+  body: data
+});
 
-    const result = await response.text();
+console.log("Status da resposta:", response.status);
+const result = await response.text();
+console.log("Texto da resposta:", result);
+
 
     if (result.includes("Sucesso")) {
       alert(t.sucesso || "Check-in enviado com sucesso!");
@@ -190,7 +193,7 @@ async function validarFormulario(e) {
     }
   } catch (error) {
     alert(t.erroFetch || "Erro de rede.");
-    console.error("Erro:", error);
+    console.error("Erro de rede (capturado):", error);
   } finally {
     if (submitBtn) submitBtn.disabled = false;
   }
