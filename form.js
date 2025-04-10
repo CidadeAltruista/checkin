@@ -199,3 +199,9 @@ function validarFormulario(e) {
 
   return false;
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  preencherIdReserva();
+  ["nacionalidade-input", "country-document-input", "country-residence-input", "pais-fatura"].forEach(preencherSelect);
+});
