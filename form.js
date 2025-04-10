@@ -64,11 +64,26 @@ function validarFormulario(e) {
 function preencherIdReserva() {
   const params = new URLSearchParams(window.location.search);
   const idres = params.get("idres") || params.get("idReserva");
-  if (idres) {
-    document.getElementById("id-reserva").value = idres;
-    document.getElementById("id-reserva-texto").textContent = "ID Reserva: " + idres;
+  const input = document.getElementById("id-reserva");
+  const textoId = document.getElementById("id-reserva-texto");
+  const erroDiv = document.getElementById("erro-idreserva");
+  const formulario = document.getElementById("checkinForm");
+
+  // Função para validar: só números, 9 ou 10 dígitos
+  const idValido = idres && /^\d{9,10}$/.test(idres);
+
+  if (idValido) {
+    input.value = idres;
+    if (textoId) textoId.textContent = "ID Reserva: " + idres;
+    formulario.style.display = "block";
+    erroDiv.style.display = "none";
+  } else {
+    formulario.style.display = "none";
+    erroDiv.textContent = traducoes[linguaAtual].erroIdReserva || "ID da Reserva não identificado. Volte a abrir o link enviado ou contacte o anfitrião. Obrigado.";
+    erroDiv.style.display = "block";
   }
 }
+
 
 
 function initForm() {
