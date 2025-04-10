@@ -5,6 +5,23 @@ body {
   max-width: 700px;
   margin: auto;
   padding: 20px;
+
+  background-image: url('logotipo.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 200px auto;
+  background-attachment: fixed;
+  opacity: 1;
+}
+
+
+body {
+  font-family: sans-serif;
+  background-color: #F4DFB6;
+  color: #1A1A1A;
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
 }
 
 h2 {
