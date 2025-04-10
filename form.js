@@ -161,41 +161,41 @@ async function validarFormulario(e) {
 
   const actionUrl = "https://script.google.com/macros/s/AKfycbxheT8rhMVTRUQEk-XhxHRTH-kei8RHZoPBLoLsWQJPFcgTwwx3TGaQBBh4DT6XG5KG/exec";
 
-  try {
-const response = await fetch(actionUrl, {
-  method: "POST",
-  body: data
-});
+try {
+  const response = await fetch(actionUrl, {
+    method: "POST",
+    body: data
+  });
 
-console.log("Status da resposta:", response.status);
-const result = await response.text();
-console.log("Texto da resposta:", result);
+  const result = await response.text();
+  console.log("Texto da resposta:", result);
 
+  if (result.includes("Sucesso")) {
+    alert(t.sucesso || "Check-in enviado com sucesso!");
 
-    if (result.includes("Sucesso")) {
-      alert(t.sucesso || "Check-in enviado com sucesso!");
+    const langAntesReset = linguaAtual;
+    form.reset();
+    selecionarLingua(langAntesReset);
 
-      const langAntesReset = linguaAtual;
-      form.reset();
-      selecionarLingua(langAntesReset);
+    ["nacionalidade-input", "country-document-input", "country-residence-input", "pais-fatura"].forEach(id => {
+      const select = document.getElementById(id);
+      if (select) select.selectedIndex = 0;
+    });
 
-      ["nacionalidade-input", "country-document-input", "country-residence-input", "pais-fatura"].forEach(id => {
-        const select = document.getElementById(id);
-        if (select) select.selectedIndex = 0;
-      });
+    const idText = document.getElementById("id-reserva-texto");
+    if (idText) idText.textContent = "";
 
-      const idText = document.getElementById("id-reserva-texto");
-      if (idText) idText.textContent = "";
-
-      mostrarCamposFatura();
-    } else {
-      alert(t.erroEnvio || "Erro ao enviar o formulário.");
-    }
-  } catch (error) {
-    alert(t.erroFetch || "Erro de rede.");
+    mostrarCamposFatura();
+  } else {
+    alert(t.erroEnvio || "Erro ao enviar o formulário.");
+  }
+} catch (error) {
+  // ✅ Tratar erro como sucesso SE contiver "Sucesso"
+  if (error.message && error.message.includes("Sucesso")) {
+    alert(t.sucesso || "Check-in enviado com sucesso!");
+  } else {
+    alert(t.erroFetch || "Erro de rede. Tente novamente.");
     console.error("Erro de rede (capturado):", error);
-  } finally {
-    if (submitBtn) submitBtn.disabled = false;
   }
 }
 
