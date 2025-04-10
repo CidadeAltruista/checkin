@@ -70,7 +70,7 @@ function preencherIdReserva() {
   const erroDiv = document.getElementById("erro-idreserva");
   const formulario = document.getElementById("checkinForm");
 
-  const idValido = idres && /^\d{9,10}$/.test(idres);
+  const idValido = idres && /^\d{8,9}$/.test(idres);
 
   if (idValido) {
     input.value = idres;
