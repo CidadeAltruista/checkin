@@ -159,7 +159,7 @@ async function validarFormulario(e) {
 
   data.append("token", "CHECKIN2024");
 
-  const actionUrl = "https://script.google.com/macros/s/AKfycbxkSoOm0QntjZrC1ukYhGmBkY4eMhCB8c-APF3CMZpT9Vczm0xbYw3mr87PUfZVe5ZV/exec";
+  const actionUrl = "https://script.google.com/macros/s/AKfycbz1KUV7axmIo_bW5bWy4KCoEJ9OxldM_oSAVhixG1kf8yxTZtvG0uUHZWRT6KBALcoy/exec";
 
   try {
 const response = await fetch(actionUrl, {
