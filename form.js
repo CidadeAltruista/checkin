@@ -111,15 +111,15 @@ function selecionarFatura(querFatura) {
   document.getElementById("fatura-opcao").setAttribute("data-quer-fatura", querFatura ? "sim" : "nao");
 }
 
-function validarFormulario(e) {
+async function validarFormulario(e) {
   e.preventDefault();
 
   const form = document.getElementById("checkinForm");
   form.noValidate = true;
-  const data = new FormData(form);
   const t = traducoes[linguaAtual];
 
-  // Validação da data de nascimento
+  const data = new FormData(form);
+
   const dataNascimentoInput = document.getElementById("data-nascimento-input");
   const dataNascimento = new Date(dataNascimentoInput.value);
   const hoje = new Date();
@@ -131,14 +131,12 @@ function validarFormulario(e) {
     return false;
   }
 
-  // Validação do email (se estiver preenchido)
   const email = document.getElementById("email-input").value;
   if (email && !/^\S+@\S+\.\S+$/.test(email)) {
     alert(t.erroEmail || "Email inválido.");
     return false;
   }
 
-  // Validação extra se quiser fatura
   const querFatura = document.getElementById("fatura-opcao").getAttribute("data-quer-fatura") === "sim";
   if (querFatura) {
     const nif = document.getElementById("nif-fatura").value.trim();
@@ -155,49 +153,49 @@ function validarFormulario(e) {
     data.append("desejaFatura", "Não");
   }
 
-  // Adiciona token de segurança
   data.append("token", "CHECKIN2024");
 
   const actionUrl = "https://script.google.com/macros/s/AKfycbxkSoOm0QntjZrC1ukYhGmBkY4eMhCB8c-APF3CMZpT9Vczm0xbYw3mr87PUfZVe5ZV/exec";
   const submitBtn = form.querySelector("button[type='submit']");
   if (submitBtn) submitBtn.disabled = true;
 
-  fetch(actionUrl, {
-    method: "POST",
-    body: data
-  })
-    .then(response => response.text())
-    .then(result => {
-      if (result.includes("Sucesso")) {
-        alert(t.sucesso || "Check-in enviado com sucesso!");
-
-        const langAntesReset = linguaAtual;
-        form.reset();
-        selecionarLingua(langAntesReset);
-
-        ["nacionalidade-input", "country-document-input", "country-residence-input", "pais-fatura"].forEach(id => {
-          const select = document.getElementById(id);
-          if (select) select.selectedIndex = 0;
-        });
-
-        const idText = document.getElementById("id-reserva-texto");
-        if (idText) idText.textContent = "";
-
-        mostrarCamposFatura();
-      } else {
-        alert(t.erroEnvio || "Erro ao enviar o formulário.");
-      }
-    })
-    .catch(error => {
-      alert(t.erroFetch || "Erro de rede.");
-      console.error("Erro:", error);
-    })
-    .finally(() => {
-      if (submitBtn) submitBtn.disabled = false;
+  try {
+    const response = await fetch(actionUrl, {
+      method: "POST",
+      body: data
     });
+
+    const result = await response.text();
+
+    if (result.includes("Sucesso")) {
+      alert(t.sucesso || "Check-in enviado com sucesso!");
+
+      const langAntesReset = linguaAtual;
+      form.reset();
+      selecionarLingua(langAntesReset);
+
+      ["nacionalidade-input", "country-document-input", "country-residence-input", "pais-fatura"].forEach(id => {
+        const select = document.getElementById(id);
+        if (select) select.selectedIndex = 0;
+      });
+
+      const idText = document.getElementById("id-reserva-texto");
+      if (idText) idText.textContent = "";
+
+      mostrarCamposFatura();
+    } else {
+      alert(t.erroEnvio || "Erro ao enviar o formulário.");
+    }
+  } catch (error) {
+    alert(t.erroFetch || "Erro de rede.");
+    console.error("Erro:", error);
+  } finally {
+    if (submitBtn) submitBtn.disabled = false;
+  }
 
   return false;
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   initForm();
