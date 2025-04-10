@@ -111,7 +111,7 @@ function selecionarFatura(querFatura) {
   document.getElementById("fatura-opcao").setAttribute("data-quer-fatura", querFatura ? "sim" : "nao");
 }
 
-async function validarFormulario(e) {
+function validarFormulario(e) {
   e.preventDefault();
 
   const form = document.getElementById("checkinForm");
@@ -158,13 +158,12 @@ async function validarFormulario(e) {
 
   const actionUrl = "https://script.google.com/macros/s/AKfycbxheT8rhMVTRUQEk-XhxHRTH-kei8RHZoPBLoLsWQJPFcgTwwx3TGaQBBh4DT6XG5KG/exec";
 
-  try {
-    const response = await fetch(actionUrl, {
-      method: "POST",
-      body: data
-    });
-
-    const result = await response.text();
+  fetch(actionUrl, {
+    method: "POST",
+    body: data
+  })
+  .then(response => response.text())
+  .then(result => {
     console.log("Texto da resposta:", result);
 
     if (result.includes("Sucesso")) {
@@ -183,17 +182,17 @@ async function validarFormulario(e) {
       if (idText) idText.textContent = "";
 
       mostrarCamposFatura();
-      return;
+    } else {
+      alert(t.erroEnvio || "Erro ao enviar o formulário.");
     }
-
-    throw new Error("Resposta inesperada: " + result);
-
-  } catch (error) {
-    alert(t.erroFetch || "Erro de rede. Tente novamente.");
-    console.error("Erro de rede (capturado):", error);
-  } finally {
+  })
+  .catch(error => {
+    console.warn("Erro ao enviar:", error);
+    alert(t.erroFetch || "Erro de rede. Mas os dados podem ter sido enviados.");
+  })
+  .finally(() => {
     if (submitBtn) submitBtn.disabled = false;
-  }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
