@@ -35,14 +35,12 @@ function atualizarTraducoes() {
     const el = document.getElementById(id);
     if (el) el.textContent = ids[id];
   }
+
   document.querySelector("#checkinForm button[type='submit']").textContent = t.enviar;
-  document.getElementById("cabecalho-info").innerHTML = traducoes[linguaAtual].cabecalho;
+  document.getElementById("cabecalho-info").innerHTML = t.cabecalho;
   document.getElementById("label-fatura-checkbox").textContent = t.faturaCheckbox;
   document.getElementById("btn-fatura-sim").textContent = t.faturaSim;
   document.getElementById("btn-fatura-nao").textContent = t.faturaNao;
-
-
-
 }
 
 function atualizarBotoes() {
@@ -50,16 +48,6 @@ function atualizarBotoes() {
     document.getElementById("btn-" + l).classList.remove("selected");
   });
   document.getElementById("btn-" + linguaAtual).classList.add("selected");
-}
-
-function validarFormulario(e) {
-  const email = document.getElementById("email-input").value;
-  if (email && !/^\S+@\S+\.\S+$/.test(email)) {
-    alert("Email inválido.");
-    e.preventDefault();
-    return false;
-  }
-  return true;
 }
 
 function preencherIdReserva() {
@@ -75,25 +63,13 @@ function preencherIdReserva() {
   if (idValido) {
     input.value = idres;
     if (textoId) textoId.textContent = "ID Reserva: " + idres;
-    if (formulario) formulario.style.display = "block";
-    if (erroDiv) erroDiv.style.display = "none";
+    formulario.style.display = "block";
+    erroDiv.style.display = "none";
   } else {
-    if (formulario) formulario.style.display = "none";
-    if (erroDiv) {
-      erroDiv.textContent = traducoes[linguaAtual]?.erroIdReserva || "ID da Reserva não identificado. Volte a abrir o link enviado ou contacte o anfitrião. Obrigado.";
-      erroDiv.style.display = "block";
-    }
+    formulario.style.display = "none";
+    erroDiv.textContent = traducoes[linguaAtual]?.erroIdReserva || "ID da Reserva não identificado. Volte a abrir o link enviado ou contacte o anfitrião. Obrigado.";
+    erroDiv.style.display = "block";
   }
-}
-
-
-
-
-function initForm() {
-  selecionarLingua(linguaAtual);
-  preencherIdReserva();
-  ["nacionalidade-input", "country-document-input", "country-residence-input", "pais-fatura"]
-  .forEach(preencherSelect);
 }
 
 function preencherSelect(id) {
@@ -117,8 +93,6 @@ function preencherSelect(id) {
   });
 }
 
-
-
 function selecionarFatura(querFatura) {
   const simBtn = document.getElementById("btn-fatura-sim");
   const naoBtn = document.getElementById("btn-fatura-nao");
@@ -134,27 +108,33 @@ function selecionarFatura(querFatura) {
     secaoFatura.style.display = "none";
   }
 
-  // Guardar valor internamente
   document.getElementById("fatura-opcao").setAttribute("data-quer-fatura", querFatura ? "sim" : "nao");
 }
-
 
 function validarFormulario(e) {
   e.preventDefault();
 
   const form = document.getElementById("checkinForm");
+  form.noValidate = true;
   const data = new FormData(form);
   const t = traducoes[linguaAtual];
 
-  // Verificação da data de nascimento
+  // Validação da data de nascimento
   const dataNascimentoInput = document.getElementById("data-nascimento-input");
   const dataNascimento = new Date(dataNascimentoInput.value);
   const hoje = new Date();
-  hoje.setHours(0, 0, 0, 0); // Ignora horas para comparar só datas
+  hoje.setHours(0, 0, 0, 0);
 
   if (dataNascimento > hoje) {
     alert(t.erroDataNascimento || "A data de nascimento não pode ser no futuro.");
     dataNascimentoInput.focus();
+    return false;
+  }
+
+  // Validação do email (se estiver preenchido)
+  const email = document.getElementById("email-input").value;
+  if (email && !/^\S+@\S+\.\S+$/.test(email)) {
+    alert(t.erroEmail || "Email inválido.");
     return false;
   }
 
@@ -179,6 +159,8 @@ function validarFormulario(e) {
   data.append("token", "CHECKIN2024");
 
   const actionUrl = "https://script.google.com/macros/s/AKfycbxkSoOm0QntjZrC1ukYhGmBkY4eMhCB8c-APF3CMZpT9Vczm0xbYw3mr87PUfZVe5ZV/exec";
+  const submitBtn = form.querySelector("button[type='submit']");
+  if (submitBtn) submitBtn.disabled = true;
 
   fetch(actionUrl, {
     method: "POST",
@@ -201,7 +183,7 @@ function validarFormulario(e) {
         const idText = document.getElementById("id-reserva-texto");
         if (idText) idText.textContent = "";
 
-        mostrarCamposFatura(); // esconde secção de fatura
+        mostrarCamposFatura();
       } else {
         alert(t.erroEnvio || "Erro ao enviar o formulário.");
       }
@@ -209,14 +191,20 @@ function validarFormulario(e) {
     .catch(error => {
       alert(t.erroFetch || "Erro de rede.");
       console.error("Erro:", error);
+    })
+    .finally(() => {
+      if (submitBtn) submitBtn.disabled = false;
     });
 
   return false;
 }
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
+  initForm();
+});
+
+function initForm() {
+  selecionarLingua(linguaAtual);
   preencherIdReserva();
   ["nacionalidade-input", "country-document-input", "country-residence-input", "pais-fatura"].forEach(preencherSelect);
-});
+}
