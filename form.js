@@ -74,13 +74,15 @@ function preencherIdReserva() {
 function initForm() {
   selecionarLingua(linguaAtual);
   preencherIdReserva();
-  ["nacionalidade-input", "country-document-input", "country-residence-input"]
+  ["nacionalidade-input", "country-document-input", "country-residence-input", "pais-fatura"]
   .forEach(preencherSelect);
 }
 
 function preencherSelect(id) {
   const select = document.getElementById(id);
-  select.innerHTML = ""; // limpa opções existentes
+  if (!select) return;
+
+  select.innerHTML = "";
 
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
@@ -96,6 +98,7 @@ function preencherSelect(id) {
     select.appendChild(option);
   });
 }
+
 
 
 function selecionarFatura(querFatura) {
@@ -161,7 +164,7 @@ function validarFormulario(e) {
         form.reset();
         selecionarLingua(langAntesReset);
 
-        ["nacionalidade-input", "country-document-input", "country-residence-input"].forEach(id => {
+        ["nacionalidade-input", "country-document-input", "country-residence-input", "pais-fatura"].forEach(id => {
           const select = document.getElementById(id);
           if (select) select.selectedIndex = 0;
         });
