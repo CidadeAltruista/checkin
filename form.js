@@ -157,7 +157,6 @@ async function validarFormulario(e) {
     data.append("desejaFatura", "Não");
   }
 
-  // Token de segurança
   data.append("token", "CHECKIN2024");
 
   const actionUrl = "https://script.google.com/macros/s/AKfycbxkSoOm0QntjZrC1ukYhGmBkY4eMhCB8c-APF3CMZpT9Vczm0xbYw3mr87PUfZVe5ZV/exec";
@@ -190,12 +189,13 @@ async function validarFormulario(e) {
       alert(t.erroEnvio || "Erro ao enviar o formulário.");
     }
   } catch (error) {
-    alert(t.erroFetch || "Erro de rede. Tente novamente.");
+    alert(t.erroFetch || "Erro de rede.");
     console.error("Erro:", error);
   } finally {
     if (submitBtn) submitBtn.disabled = false;
   }
 }
+
 
 
 
