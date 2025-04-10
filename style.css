@@ -1,14 +1,14 @@
 body::after {
   content: "";
   position: fixed;
-  bottom: 100px;
+  bottom: 150px;
   left: 50%;
   transform: translateX(-50%);
   background-image: url('logotipo.png');
   background-repeat: no-repeat;
-  background-size: clamp(250px, 35vw, 400px) auto;
+  background-size: clamp(350px, 35vw, 550px) auto;
   opacity: 0.2;
-  width: clamp(180px, 25vw, 320px);
+  width: clamp(350px, 35vw, 550px);
   height: auto;
   aspect-ratio: 1 / 1;
   pointer-events: none;
