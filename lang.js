@@ -9,7 +9,7 @@ const traducoes = {
     countryDocument: "País do Documento",
     idType: "Tipo de Documento",
     countryResidence: "País de Residência",
-    placeResidence: "Local de Residência",
+    placeResidence: "Morada de Residência",
     arrivalTime: "Hora de Chegada",
     email: "Deixe o seu email se quiser manter contacto:",
     enviar: "Enviar",
