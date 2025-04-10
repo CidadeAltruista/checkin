@@ -1,18 +1,20 @@
 body::after {
   content: "";
   position: fixed;
-  bottom: 20px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   background-image: url('logotipo.png');
-  background-size: 200px auto;
   background-repeat: no-repeat;
-  opacity: 0.05;
-  width: 200px;
-  height: 200px;
+  background-size: clamp(180px, 25vw, 320px) auto;
+  opacity: 0.2;
+  width: clamp(180px, 25vw, 320px);
+  height: auto;
+  aspect-ratio: 1 / 1;
   pointer-events: none;
   z-index: -1;
 }
+
 
 
 
