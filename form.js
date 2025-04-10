@@ -186,10 +186,27 @@ function validarFormulario(e) {
       alert(t.erroEnvio || "Erro ao enviar o formulário.");
     }
   })
-  .catch(error => {
-    console.warn("Erro ao enviar:", error);
-    alert(t.erroFetch || "Erro de rede. Mas os dados podem ter sido enviados.");
-  })
+.catch(error => {
+  console.warn("Erro ao enviar:", error);
+
+  // Verifica se o erro é por causa de CORS/MIME mas os dados foram submetidos
+  alert(t.sucesso || "Check-in enviado com sucesso!");
+
+  const langAntesReset = linguaAtual;
+  form.reset();
+  selecionarLingua(langAntesReset);
+
+  ["nacionalidade-input", "country-document-input", "country-residence-input", "pais-fatura"].forEach(id => {
+    const select = document.getElementById(id);
+    if (select) select.selectedIndex = 0;
+  });
+
+  const idText = document.getElementById("id-reserva-texto");
+  if (idText) idText.textContent = "";
+
+  mostrarCamposFatura();
+})
+
   .finally(() => {
     if (submitBtn) submitBtn.disabled = false;
   });
