@@ -117,47 +117,50 @@ async function validarFormulario(e) {
   const form = document.getElementById("checkinForm");
   form.noValidate = true;
   const t = traducoes[linguaAtual];
-
   const data = new FormData(form);
+  const submitBtn = form.querySelector("button[type='submit']");
+  if (submitBtn) submitBtn.disabled = true;
 
+  // Validação: data de nascimento
   const dataNascimentoInput = document.getElementById("data-nascimento-input");
   const dataNascimento = new Date(dataNascimentoInput.value);
   const hoje = new Date();
   hoje.setHours(0, 0, 0, 0);
-
   if (dataNascimento > hoje) {
     alert(t.erroDataNascimento || "A data de nascimento não pode ser no futuro.");
     dataNascimentoInput.focus();
-    return false;
+    if (submitBtn) submitBtn.disabled = false;
+    return;
   }
 
+  // Validação: email
   const email = document.getElementById("email-input").value;
   if (email && !/^\S+@\S+\.\S+$/.test(email)) {
     alert(t.erroEmail || "Email inválido.");
-    return false;
+    if (submitBtn) submitBtn.disabled = false;
+    return;
   }
 
+  // Validação: fatura
   const querFatura = document.getElementById("fatura-opcao").getAttribute("data-quer-fatura") === "sim";
   if (querFatura) {
     const nif = document.getElementById("nif-fatura").value.trim();
     const pais = document.getElementById("pais-fatura").value.trim();
     const emailFatura = document.getElementById("email-fatura").value.trim();
-
     if (!nif || !pais || !emailFatura) {
       alert(t.erroFatura || "Por favor preencha os campos obrigatórios para a fatura.");
-      return false;
+      if (submitBtn) submitBtn.disabled = false;
+      return;
     }
-
     data.append("desejaFatura", "Sim");
   } else {
     data.append("desejaFatura", "Não");
   }
 
+  // Token de segurança
   data.append("token", "CHECKIN2024");
 
   const actionUrl = "https://script.google.com/macros/s/AKfycbxkSoOm0QntjZrC1ukYhGmBkY4eMhCB8c-APF3CMZpT9Vczm0xbYw3mr87PUfZVe5ZV/exec";
-  const submitBtn = form.querySelector("button[type='submit']");
-  if (submitBtn) submitBtn.disabled = true;
 
   try {
     const response = await fetch(actionUrl, {
@@ -187,14 +190,13 @@ async function validarFormulario(e) {
       alert(t.erroEnvio || "Erro ao enviar o formulário.");
     }
   } catch (error) {
-    alert(t.erroFetch || "Erro de rede.");
+    alert(t.erroFetch || "Erro de rede. Tente novamente.");
     console.error("Erro:", error);
   } finally {
     if (submitBtn) submitBtn.disabled = false;
   }
-
-  return false;
 }
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
