@@ -144,9 +144,19 @@ function validarFormulario(e) {
 
   const form = document.getElementById("checkinForm");
   const data = new FormData(form);
+  const t = traducoes[linguaAtual];
 
-  // Adiciona token de segurança
-  data.append("token", "CHECKIN2024");
+  // Verificação da data de nascimento
+  const dataNascimentoInput = document.getElementById("data-nascimento-input");
+  const dataNascimento = new Date(dataNascimentoInput.value);
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0); // Ignora horas para comparar só datas
+
+  if (dataNascimento > hoje) {
+    alert(t.erroDataNascimento || "A data de nascimento não pode ser no futuro.");
+    dataNascimentoInput.focus();
+    return false;
+  }
 
   // Validação extra se quiser fatura
   const querFatura = document.getElementById("fatura-opcao").getAttribute("data-quer-fatura") === "sim";
@@ -156,7 +166,7 @@ function validarFormulario(e) {
     const emailFatura = document.getElementById("email-fatura").value.trim();
 
     if (!nif || !pais || !emailFatura) {
-      alert(traducoes[linguaAtual].erroFatura || "Por favor preencha os campos obrigatórios para a fatura.");
+      alert(t.erroFatura || "Por favor preencha os campos obrigatórios para a fatura.");
       return false;
     }
 
@@ -165,7 +175,10 @@ function validarFormulario(e) {
     data.append("desejaFatura", "Não");
   }
 
-  const actionUrl = "https://script.google.com/macros/s/AKfycbxkSoOm0QntjZrC1ukYhGmBkY4eMhCB8c-APF3CMZpT9Vczm0xbYw3mr87PUfZVe5ZV/exec"; // substitui aqui
+  // Adiciona token de segurança
+  data.append("token", "CHECKIN2024");
+
+  const actionUrl = "https://script.google.com/macros/s/AKfycbxkSoOm0QntjZrC1ukYhGmBkY4eMhCB8c-APF3CMZpT9Vczm0xbYw3mr87PUfZVe5ZV/exec";
 
   fetch(actionUrl, {
     method: "POST",
@@ -173,8 +186,6 @@ function validarFormulario(e) {
   })
     .then(response => response.text())
     .then(result => {
-      const t = traducoes[linguaAtual];
-
       if (result.includes("Sucesso")) {
         alert(t.sucesso || "Check-in enviado com sucesso!");
 
@@ -196,12 +207,13 @@ function validarFormulario(e) {
       }
     })
     .catch(error => {
-      alert(traducoes[linguaAtual].erroFetch || "Erro de rede.");
+      alert(t.erroFetch || "Erro de rede.");
       console.error("Erro:", error);
     });
 
   return false;
 }
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
