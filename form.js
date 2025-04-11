@@ -126,6 +126,33 @@ function validarFormulario(e) {
     submitBtn.textContent = t.enviando || "Enviando...";
   }
 
+  const camposObrigatorios = [
+    "primeiro-nome-input",
+    "ultimo-nome-input",
+    "local-nascimento-input",
+    "data-nascimento-input",
+    "nacionalidade-input",
+    "id-number-input",
+    "country-document-input",
+    "id-type-input",
+    "country-residence-input",
+    "place-residence-input"
+  ];
+
+  for (const id of camposObrigatorios) {
+    const campo = document.getElementById(id);
+    if (!campo || !campo.value.trim()) {
+      alert(t.erroCamposObrigatorios || "Por favor preencha todos os campos obrigatórios.");
+      campo?.focus();
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.style.backgroundColor = "";
+        submitBtn.textContent = t.enviar;
+      }
+      return;
+    }
+  }
+
   const dataNascimentoInput = document.getElementById("data-nascimento-input");
   const dataNascimento = new Date(dataNascimentoInput.value);
   const hoje = new Date();
