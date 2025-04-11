@@ -131,3 +131,9 @@ button {
   border-color: #244041;
 }
 
+.erro-campo {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
+
