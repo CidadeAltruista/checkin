@@ -119,7 +119,12 @@ function validarFormulario(e) {
   const t = traducoes[linguaAtual];
   const data = new FormData(form);
   const submitBtn = form.querySelector("button[type='submit']");
-  if (submitBtn) submitBtn.disabled = true;
+
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.style.backgroundColor = "#ccc";
+    submitBtn.textContent = t.enviando || "Enviando...";
+  }
 
   const dataNascimentoInput = document.getElementById("data-nascimento-input");
   const dataNascimento = new Date(dataNascimentoInput.value);
@@ -128,14 +133,22 @@ function validarFormulario(e) {
   if (dataNascimento > hoje) {
     alert(t.erroDataNascimento || "A data de nascimento não pode ser no futuro.");
     dataNascimentoInput.focus();
-    if (submitBtn) submitBtn.disabled = false;
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.style.backgroundColor = "";
+      submitBtn.textContent = t.enviar;
+    }
     return;
   }
 
   const email = document.getElementById("email-input").value;
   if (email && !/^\S+@\S+\.\S+$/.test(email)) {
     alert(t.erroEmail || "Email inválido.");
-    if (submitBtn) submitBtn.disabled = false;
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.style.backgroundColor = "";
+      submitBtn.textContent = t.enviar;
+    }
     return;
   }
 
@@ -146,7 +159,11 @@ function validarFormulario(e) {
     const emailFatura = document.getElementById("email-fatura").value.trim();
     if (!nif || !pais || !emailFatura) {
       alert(t.erroFatura || "Por favor preencha os campos obrigatórios para a fatura.");
-      if (submitBtn) submitBtn.disabled = false;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.style.backgroundColor = "";
+        submitBtn.textContent = t.enviar;
+      }
       return;
     }
     data.append("desejaFatura", "Sim");
@@ -162,11 +179,32 @@ function validarFormulario(e) {
     method: "POST",
     body: data
   })
-  .then(response => response.text())
-  .then(result => {
-    console.log("Texto da resposta:", result);
+    .then(response => response.text())
+    .then(result => {
+      console.log("Texto da resposta:", result);
 
-    if (result.includes("Sucesso")) {
+      if (result.includes("Sucesso")) {
+        alert(t.sucesso || "Check-in enviado com sucesso!");
+
+        const langAntesReset = linguaAtual;
+        form.reset();
+        selecionarLingua(langAntesReset);
+
+        ["nacionalidade-input", "country-document-input", "country-residence-input", "pais-fatura"].forEach(id => {
+          const select = document.getElementById(id);
+          if (select) select.selectedIndex = 0;
+        });
+
+        const idText = document.getElementById("id-reserva-texto");
+        if (idText) idText.textContent = "";
+
+        mostrarCamposFatura();
+      } else {
+        alert(t.erroEnvio || "Erro ao enviar o formulário.");
+      }
+    })
+    .catch(error => {
+      console.warn("Erro ao enviar:", error);
       alert(t.sucesso || "Check-in enviado com sucesso!");
 
       const langAntesReset = linguaAtual;
@@ -182,34 +220,14 @@ function validarFormulario(e) {
       if (idText) idText.textContent = "";
 
       mostrarCamposFatura();
-    } else {
-      alert(t.erroEnvio || "Erro ao enviar o formulário.");
-    }
-  })
-.catch(error => {
-  console.warn("Erro ao enviar:", error);
-
-  // Verifica se o erro é por causa de CORS/MIME mas os dados foram submetidos
-  alert(t.sucesso || "Check-in enviado com sucesso!");
-
-  const langAntesReset = linguaAtual;
-  form.reset();
-  selecionarLingua(langAntesReset);
-
-  ["nacionalidade-input", "country-document-input", "country-residence-input", "pais-fatura"].forEach(id => {
-    const select = document.getElementById(id);
-    if (select) select.selectedIndex = 0;
-  });
-
-  const idText = document.getElementById("id-reserva-texto");
-  if (idText) idText.textContent = "";
-
-  mostrarCamposFatura();
-})
-
-  .finally(() => {
-    if (submitBtn) submitBtn.disabled = false;
-  });
+    })
+    .finally(() => {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.style.backgroundColor = "";
+        submitBtn.textContent = t.enviar;
+      }
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
