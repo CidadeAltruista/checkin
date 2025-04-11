@@ -29,6 +29,8 @@ const traducoes = {
     emailFatura: "Email para envio da fatura *",
     erroIdReserva: "ID da Reserva não identificado. Volte a abrir o link enviado ou contacte o anfitrião. Obrigado.",
     erroDataNascimento: "A data de nascimento não pode ser no futuro.",
+    enviar: "Enviar",
+    enviando: "Enviando...",
     cabecalho: `
       <h2>Boletim de Alojamento</h2>
       <p>Em Portugal, assim como na maioria dos países europeus, todos os estabelecimentos de alojamento pago devem registar a estadia e recolher dados de identificação de todos os cidadãos, sejam eles de Estados-Membros da União Europeia ou de Países Terceiros, para comunicar ao Serviço de Estrangeiros e Fronteiras no prazo de três dias.</p>
@@ -66,6 +68,8 @@ const traducoes = {
     emailFatura: "Invoice email *",
     erroIdReserva: "Reservation ID not identified. Please reopen the link sent or contact the host. Thank you.",
     erroDataNascimento: "Date of birth cannot be in the future.",
+    enviar: "Submit",
+    enviando: "Sending...",
     cabecalho: `
       <h2>Accommodation Bulletin</h2>
       <p>In Portugal, as well as in most European countries, all paid accommodation establishments need to record the stay and collect identification details from all citizens, whether they are from Member States of the European Union or Third Country Nationals, in order to communicate them within three days to the Immigration and Borders Service.</p>
@@ -103,6 +107,8 @@ const traducoes = {
     emailFatura: "Email pour l'envoi de la facture *",
     erroIdReserva: "Identifiant de réservation non identifié. Veuillez rouvrir le lien envoyé ou contacter l’hôte. Merci.",
     erroDataNascimento: "La date de naissance ne peut pas être dans le futur.",
+    enviar: "Envoyer",
+    enviando: "Envoi en cours...",
     cabecalho: `
       <h2>Bulletin d'Hébergement</h2>
       <p>Au Portugal, comme dans la plupart des pays européens, tous les établissements d'hébergement payants doivent enregistrer le séjour et collecter les informations d'identification de tous les citoyens, qu'ils soient ressortissants de l'Union européenne ou de pays tiers, afin de les communiquer dans un délai de trois jours au Service de l'immigration et des frontières.</p>
@@ -140,6 +146,8 @@ const traducoes = {
     emailFatura: "Correo para envío de la factura *",
     erroIdReserva: "ID de reserva no identificado. Vuelva a abrir el enlace enviado o contacte con el anfitrión. Gracias.",
     erroDataNascimento: "La fecha de nacimiento no puede estar en el futuro.",
+    enviar: "Enviar",
+    enviando: "Enviando...",
     cabecalho: `
       <h2>Boletín de Alojamiento</h2>
       <p>En Portugal, al igual que en la mayoría de los países europeos, todos los alojamientos de pago deben registrar la estancia y recopilar los datos de identificación de todos los ciudadanos, ya sean de Estados miembros de la Unión Europea o de países terceros, con el fin de comunicarlos en un plazo de tres días al Servicio de Inmigración y Fronteras.</p>
