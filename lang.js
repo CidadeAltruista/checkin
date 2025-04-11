@@ -28,7 +28,7 @@ const traducoes = {
     paisFatura: "País *",
     emailFatura: "Email para envio da fatura *",
     erroIdReserva: "ID da Reserva não identificado. Volte a abrir o link enviado ou contacte o anfitrião. Obrigado.",
-    erroDataNascimento: "A data de nascimento não pode ser no futuro.",
+    erroDataNascimento: "Data de Nascimento inválida.",
     enviar: "Enviar",
     enviando: "Enviando...",
     cabecalho: `
@@ -67,7 +67,7 @@ const traducoes = {
     paisFatura: "Country *",
     emailFatura: "Invoice email *",
     erroIdReserva: "Reservation ID not identified. Please reopen the link sent or contact the host. Thank you.",
-    erroDataNascimento: "Date of birth cannot be in the future.",
+    erroDataNascimento: "Invalid Date of Birth.",
     enviar: "Submit",
     enviando: "Sending...",
     cabecalho: `
@@ -106,7 +106,7 @@ const traducoes = {
     paisFatura: "Pays *",
     emailFatura: "Email pour l'envoi de la facture *",
     erroIdReserva: "Identifiant de réservation non identifié. Veuillez rouvrir le lien envoyé ou contacter l’hôte. Merci.",
-    erroDataNascimento: "La date de naissance ne peut pas être dans le futur.",
+    erroDataNascimento: "Date de naissance invalide.",
     enviar: "Envoyer",
     enviando: "Envoi en cours...",
     cabecalho: `
@@ -145,7 +145,7 @@ const traducoes = {
     paisFatura: "País *",
     emailFatura: "Correo para envío de la factura *",
     erroIdReserva: "ID de reserva no identificado. Vuelva a abrir el enlace enviado o contacte con el anfitrión. Gracias.",
-    erroDataNascimento: "La fecha de nacimiento no puede estar en el futuro.",
+    erroDataNascimento: "Fecha de nacimiento no válida.",
     enviar: "Enviar",
     enviando: "Enviando...",
     cabecalho: `
