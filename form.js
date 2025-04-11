@@ -139,27 +139,23 @@ function validarFormulario(e) {
     "place-residence-input"
   ];
 
-  for (const id of camposObrigatorios) {
-    const campo = document.getElementById(id);
-    if (!campo || !campo.value.trim()) {
-      alert(t.erroCamposObrigatorios || "Por favor preencha todos os campos obrigatórios.");
-      campo?.focus();
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.style.backgroundColor = "";
-        submitBtn.textContent = t.enviar;
-      }
-      return;
-    }
-  }
+  let erro = false;
 
-  const dataNascimentoInput = document.getElementById("data-nascimento-input");
-  const dataNascimento = new Date(dataNascimentoInput.value);
-  const hoje = new Date();
-  hoje.setHours(0, 0, 0, 0);
-  if (dataNascimento > hoje) {
-    alert(t.erroDataNascimento || "A data de nascimento não pode ser no futuro.");
-    dataNascimentoInput.focus();
+  camposObrigatorios.forEach(id => {
+    const campo = document.getElementById(id);
+    campo.classList.remove("erro-campo");
+    if (!campo || !campo.value.trim() || campo.value === "--") {
+      campo?.classList.add("erro-campo");
+      erro = true;
+    }
+    if (campo && campo.type === "text" && campo.value.length > 40) {
+      campo.classList.add("erro-campo");
+      erro = true;
+    }
+  });
+
+  if (erro) {
+    alert(t.erroCamposObrigatorios || "Por favor preencha todos os campos obrigatórios.");
     if (submitBtn) {
       submitBtn.disabled = false;
       submitBtn.style.backgroundColor = "";
@@ -168,8 +164,26 @@ function validarFormulario(e) {
     return;
   }
 
+  const dataNascimentoInput = document.getElementById("data-nascimento-input");
+  const dataNascimento = new Date(dataNascimentoInput.value);
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+  if (dataNascimento > hoje || dataNascimento.getFullYear() < 1920) {
+    dataNascimentoInput.classList.add("erro-campo");
+    alert(t.erroDataNascimento || "A data de nascimento não pode ser no futuro nem anterior a 1920.");
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.style.backgroundColor = "";
+      submitBtn.textContent = t.enviar;
+    }
+    return;
+  } else {
+    dataNascimentoInput.classList.remove("erro-campo");
+  }
+
   const email = document.getElementById("email-input").value;
   if (email && !/^\S+@\S+\.\S+$/.test(email)) {
+    document.getElementById("email-input").classList.add("erro-campo");
     alert(t.erroEmail || "Email inválido.");
     if (submitBtn) {
       submitBtn.disabled = false;
@@ -177,14 +191,32 @@ function validarFormulario(e) {
       submitBtn.textContent = t.enviar;
     }
     return;
+  } else {
+    document.getElementById("email-input").classList.remove("erro-campo");
   }
 
   const querFatura = document.getElementById("fatura-opcao").getAttribute("data-quer-fatura") === "sim";
   if (querFatura) {
-    const nif = document.getElementById("nif-fatura").value.trim();
-    const pais = document.getElementById("pais-fatura").value.trim();
-    const emailFatura = document.getElementById("email-fatura").value.trim();
-    if (!nif || !pais || !emailFatura) {
+    const camposFatura = [
+      "nif-fatura",
+      "pais-fatura",
+      "email-fatura"
+    ];
+    let erroFatura = false;
+    camposFatura.forEach(id => {
+      const campo = document.getElementById(id);
+      campo.classList.remove("erro-campo");
+      if (!campo.value.trim() || campo.value === "--") {
+        campo.classList.add("erro-campo");
+        erroFatura = true;
+      }
+      if (id === "email-fatura" && !/^\S+@\S+\.\S+$/.test(campo.value.trim())) {
+        campo.classList.add("erro-campo");
+        erroFatura = true;
+      }
+    });
+
+    if (erroFatura) {
       alert(t.erroFatura || "Por favor preencha os campos obrigatórios para a fatura.");
       if (submitBtn) {
         submitBtn.disabled = false;
