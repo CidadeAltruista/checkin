@@ -232,7 +232,7 @@ function validarFormulario(e) {
 
   data.append("token", "CHECKIN2024");
 
-  const actionUrl = "https://script.google.com/macros/s/AKfycbyMHs_t9XeAQhwTVSf99ikQvbqre0axSfL51qAqZVZ2GMX5Olcmy6kl_KPNDHKBDdC-/exec";
+  const actionUrl = "https://script.google.com/macros/s/AKfycbzOuZopLI7QI0CBolnMv9sUD9ceLGHABxjv6KkEySJ25M2UOPoCat4Z36C79OasQ3Et/exec";
 
   fetch(actionUrl, {
     method: "POST",
